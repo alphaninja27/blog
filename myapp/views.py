@@ -30,10 +30,6 @@ def user_register(request):
             return redirect('login')
     return render(request,'register.html')
 
-def user_logout(request):
-    logout(request)
-    return redirect('/')
-
 def user_login(request):
     if request.method=="POST":
         username = request.POST.get('username')
@@ -46,3 +42,7 @@ def user_login(request):
             messages.warning(request,'Sorry! Invalid Credentials!')
             return redirect('login')
     return render(request,'login.html')
+
+def user_logout(request):
+    logout(request)
+    return redirect('/')
