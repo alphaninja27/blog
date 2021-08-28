@@ -51,4 +51,11 @@ def user_logout(request):
     return redirect('/')
 
 def post_blog(request):
+    if request.method=="POST":
+        title = request.POST.get('title')
+        desc = request.POST.get('Description')
+        blog = Blog(title=title,dsc=desc,user_id=request.user)
+        blog.save()
+        messages.success(request,'Posted Successfully!')
+        return redirect('post_blog')
     return render(request,'blog_post.html')

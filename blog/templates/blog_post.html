@@ -4,37 +4,27 @@
 <title>Home</title>
 {% endblock title %}
 {% block body %}
+{%for message in messages %}
+<div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+ {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
 <div class ="container">
-<h1>Post Blog</h1>
-<form>
+<h1 class='text-center my-3'>Post Blog</h1>
+<form action='post_blog' method='POST'>
+ {% csrf_token %}
   <div class="form-group">
-    <label for="exampleFormControlInput1">Email address</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    <label for="exampleFormControlInput1">Title</label>
+    <input type="text" class="form-control" id="title" placeholder="Add Title...">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlSelect1">Example select</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
+    <label for="exampleFormControlTextarea1">Content</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" name='Description' rows="3" placeholder="Write Here..."></textarea>
   </div>
-  <div class="form-group">
-    <label for="exampleFormControlSelect2">Example multiple select</label>
-    <select multiple class="form-control" id="exampleFormControlSelect2">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Example textarea</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-  </div>
+  <input type='submit' value='Post' class='btn btn-primary'>
 </form>
 </div>
 {% endblock %}
