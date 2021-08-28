@@ -1,14 +1,17 @@
+from myapp.models import Blog
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-
+from . models import Blog
 
 # Create your views here.
 def index(request):
-    return render(request,'home.html')
+    blog = Blog.objects.all()
+    context={'blogs' :blog}
+    return render(request,'home.html',context)
 
 def user_register(request):
     if request.method=='POST':
@@ -46,3 +49,6 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('/')
+
+def post_blog(request):
+    return render(request,'blog_post.html')
