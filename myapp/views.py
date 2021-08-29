@@ -59,3 +59,8 @@ def post_blog(request):
         messages.success(request,'Posted Successfully!')
         return redirect('post_blog')
     return render(request,'blog_post.html')
+
+def blog_detail(request,id):
+    blog = Blog.objects.get(id=id)
+    context = {'blog':blog}
+    return render(request,'blog_detail.html',context)
